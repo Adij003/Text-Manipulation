@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link, link} from 'react-router-dom';
 
 
 
@@ -8,6 +9,7 @@ export default function TextForm(props) {
         setBackupText(text);
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Changed to UpperCase", "Success");
     }
     const handleOnChange = (event)=>{
         
@@ -16,7 +18,8 @@ export default function TextForm(props) {
     const handleLowClick = ()=>{
         setBackupText(text);
         let newText = text.toLowerCase();
-        setText(newText);
+        setText(newText); 
+        props.showAlert("Changed to lowerCase", "Success");
     }
     const handleClearText = () =>{
         setBackupText(text);
@@ -32,6 +35,7 @@ export default function TextForm(props) {
         let copyText = document.getElementById("myTextArea");
         copyText.select();
         navigator.clipboard.writeText(copyText.value);
+        props.showAlert("Text Copied", "Success");
     }
     const handleRevertText = ()=>
     {
@@ -65,6 +69,11 @@ export default function TextForm(props) {
     <p>{text.split(" ").length-1} Words and {text.length} Characters</p>
     <p>{Math.ceil(0.008 * (text.split(" ").length-1))} Minute read</p>
     </div> 
+    <div className="container">
+    <Link className="nav-link" to="/Review">
+    <button className="btn btn-primary second" >Review!</button>
+    </Link>
+    </div>
 </>  
   )
 }
